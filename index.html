@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>invitacion.exe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --canvas-bg: #090a12;
+      --card-surface: rgba(18, 19, 31, 0.78);
+      --card-border: rgba(223, 186, 115, 0.28);
+      --gold-primary: #dfba73;
+      --gold-light: #faebd0;
+      --gold-glow: rgba(223, 186, 115, 0.35);
+      --rose-pigment: #e27d96;
+      --ultramarine: #384b9e;
+      --text-main: #f8f6f0;
+      --text-soft: #b2b0c2;
+      --text-dim: #79768f;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Plus Jakarta Sans', sans-serif;
+      --mono: 'Space Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: var(--canvas-bg);
+      font-family: var(--sans);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 36px 16px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Fondo artístico: Manchas orgánicas de óleo y acuarela digital */
+    .art-backdrop {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .pigment {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(85px);
+      opacity: 0.42;
+      animation: pigmentFloat 18s alternate infinite ease-in-out;
+    }
+
+    .pigment-1 {
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, #4d2d7d 0%, #1a1638 70%);
+      top: -120px;
+      left: -140px;
+    }
+
+    .pigment-2 {
+      width: 560px;
+      height: 560px;
+      background: radial-gradient(circle, #8c2a47 0%, #d49544 60%, transparent 80%);
+      bottom: -150px;
+      right: -120px;
+      animation-delay: -6s;
+    }
+
+    .pigment-3 {
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, #1d4e68 0%, #0d2736 70%);
+      top: 35%;
+      left: 60%;
+      animation-delay: -11s;
+    }
+
+    .pigment-4 {
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, #b8863b 0%, transparent 70%);
+      top: 50%;
+      left: 20%;
+      opacity: 0.25;
+    }
+
+    @keyframes pigmentFloat {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      100% { transform: translate(45px, 55px) scale(1.1) rotate(14deg); }
+    }
+
+    /* Textura de lienzo clásico con trama fina */
+    .canvas-overlay {
+      position: fixed;
+      inset: 0;
+      background-image: 
+        radial-gradient(rgba(223, 186, 115, 0.09) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 28px 28px, 6px 6px, 6px 6px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Marco de galería */
+    .frame-wrapper {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 560px;
+      border-radius: 28px;
+      padding: 1.5px;
+      background: linear-gradient(140deg, rgba(223, 186, 115, 0.7) 0%, rgba(255, 255, 255, 0.1) 30%, rgba(226, 125, 150, 0.5) 75%, rgba(223, 186, 115, 0.4) 100%);
+      box-shadow: 
+        0 35px 70px -15px rgba(0, 0, 0, 0.85),
+        0 0 50px -10px var(--gold-glow);
+      animation: frameEntrance 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    @keyframes frameEntrance {
+      from { opacity: 0; transform: translateY(32px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .frame-inner {
+      background: var(--card-surface);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border-radius: 27px;
+      padding: 38px 34px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gallery-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(223, 186, 115, 0.2);
+      padding-bottom: 14px;
+      margin-bottom: 22px;
+    }
+
+    .gallery-header .title-tag {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 17px;
+      color: var(--gold-primary);
+      letter-spacing: 0.5px;
+    }
+
+    .gallery-header .edition {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 1.2px;
+    }
+
+    .terminal-art {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      line-height: 1.85;
+      color: var(--text-soft);
+      background: rgba(10, 11, 20, 0.7);
+      border: 1px solid rgba(223, 186, 115, 0.15);
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin-bottom: 24px;
+    }
+
+    .terminal-art .prompt { color: var(--gold-primary); }
+    .terminal-art .key { color: var(--rose-pigment); }
+    .terminal-art .str { color: #8ecaa8; }
+    .terminal-art .comment { color: #6d6b82; font-style: italic; }
+
+    .cursor {
+      display: inline-block;
+      width: 7px;
+      height: 14px;
+      background: var(--gold-primary);
+      vertical-align: middle;
+      animation: blink 0.9s infinite;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .art-body {
+      display: none;
+      opacity: 0;
+    }
+
+    .art-body.active {
+      display: block;
+      animation: fadeInSmooth 0.7s ease forwards;
+    }
+
+    @keyframes fadeInSmooth {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .main-heading {
+      font-family: var(--serif);
+      font-size: 35px;
+      font-weight: 600;
+      line-height: 1.18;
+      color: var(--gold-light);
+      margin-bottom: 16px;
+      letter-spacing: -0.3px;
+    }
+
+    .presentation-text {
+      font-size: 15px;
+      line-height: 1.75;
+      color: #d6d3e2;
+      margin-bottom: 22px;
+      font-weight: 400;
+    }
+
+    .art-highlight {
+      color: var(--gold-light);
+      border-bottom: 1px dotted var(--gold-primary);
+      font-weight: 500;
+    }
+
+    .lead-question-text {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 18.5px;
+      color: var(--rose-pigment);
+      margin-bottom: 22px;
+      display: block;
+    }
+
+    .stage-card {
+      display: none;
+    }
+
+    .stage-card.active {
+      display: block;
+      animation: fadeInSmooth 0.5s ease forwards;
+    }
+
+    .question-panel {
+      background: linear-gradient(180deg, rgba(223, 186, 115, 0.08) 0%, rgba(226, 125, 150, 0.05) 100%);
+      border: 1px solid rgba(223, 186, 115, 0.22);
+      border-radius: 20px;
+      padding: 24px 20px;
+      text-align: center;
+    }
+
+    .question-title {
+      font-family: var(--serif);
+      font-size: 26px;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 22px;
+      letter-spacing: 0.2px;
+    }
+
+    .button-arena {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      min-height: 120px;
+    }
+
+    .primary-choices {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    button {
+      font-family: var(--sans);
+      font-size: 14.5px;
+      font-weight: 600;
+      padding: 13px 22px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-accept {
+      background: linear-gradient(135deg, #dfba73 0%, #c49947 100%);
+      color: #12131a;
+      box-shadow: 0 8px 22px -6px rgba(223, 186, 115, 0.5);
+    }
+
+    .btn-accept:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px -6px rgba(223, 186, 115, 0.7);
+      color: #000000;
+    }
+
+    .btn-know-more {
+      background: rgba(226, 125, 150, 0.12);
+      color: #f7cbd6;
+      border: 1px solid rgba(226, 125, 150, 0.35);
+    }
+
+    .btn-know-more:hover {
+      background: rgba(226, 125, 150, 0.22);
+      transform: translateY(-2px);
+      border-color: rgba(226, 125, 150, 0.6);
+    }
+
+    .btn-dodge {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-soft);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: left 0.15s ease, top 0.15s ease, transform 0.1s ease;
+    }
+
+    .btn-dodge:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+    }
+
+    .decline-subtext {
+      display: block;
+      margin-top: 14px;
+      font-size: 12.5px;
+      color: var(--text-dim);
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .decline-subtext:hover {
+      color: var(--text-soft);
+      text-decoration: underline;
+    }
+
+    .schedule-panel {
+      background: rgba(14, 15, 26, 0.65);
+      border: 1px solid rgba(223, 186, 115, 0.16);
+      border-radius: 20px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .schedule-header-msg {
+      font-size: 15px;
+      color: #d6d3e2;
+      margin-bottom: 20px;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .palette-input {
+      font-family: var(--mono);
+      font-size: 13.5px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(223, 186, 115, 0.22);
+      border-radius: 10px;
+      color: #ffffff;
+      padding: 12px 14px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      color-scheme: dark;
+    }
+
+    .palette-input:focus {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 0 3px rgba(223, 186, 115, 0.22);
+    }
+
+    .btn-confirm-send {
+      background: linear-gradient(135deg, #76a88b 0%, #4e8566 100%);
+      color: #ffffff;
+      box-shadow: 0 8px 20px -6px rgba(118, 168, 139, 0.5);
+      width: 100%;
+      max-width: 260px;
+      margin: 0 auto;
+    }
+
+    .btn-confirm-send:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px -6px rgba(118, 168, 139, 0.65);
+    }
+
+    .btn-confirm-send:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .status-panel {
+      text-align: center;
+      padding: 24px 16px;
+    }
+
+    .status-title {
+      font-family: var(--serif);
+      font-size: 31px;
+      font-weight: 600;
+      color: var(--gold-light);
+      margin-bottom: 12px;
+    }
+
+    .selection-badge {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 13.5px;
+      background: rgba(223, 186, 115, 0.12);
+      border: 1px solid rgba(223, 186, 115, 0.3);
+      color: var(--gold-primary);
+      padding: 8px 18px;
+      border-radius: 8px;
+      margin-bottom: 18px;
+    }
+
+    .status-text {
+      font-size: 15px;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+
+    .status-text.note {
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-top: 14px;
+    }
+
+    @media (max-width: 480px) {
+      .frame-inner { padding: 28px 20px; }
+      .main-heading { font-size: 28px; }
+      .question-title { font-size: 22px; }
+      .primary-choices { flex-direction: column; width: 100%; }
+      .primary-choices button { width: 100%; }
+      .input-row { flex-direction: column; }
+      .palette-input { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fondo dinámico con mezclas de pigmentos al óleo -->
+  <div class="art-backdrop">
+    <div class="pigment pigment-1"></div>
+    <div class="pigment pigment-2"></div>
+    <div class="pigment pigment-3"></div>
+    <div class="pigment pigment-4"></div>
+  </div>
+  <div class="canvas-overlay"></div>
+
+  <div class="frame-wrapper">
+    <div class="frame-inner">
+      
+      <div class="gallery-header">
+        <span class="title-tag">invitacion.exe</span>
+        <span class="edition">EDICIÓN ESPECIAL</span>
+      </div>
+
+      <div class="terminal-art" id="terminalArt"></div>
+
+      <div class="art-body" id="artBody">
+        <h1 class="main-heading">Hola 👋, espero te encuentres bien</h1>
+        
+        <p class="presentation-text">
+          Estudio <span class="art-highlight">Ingeniería en Inteligencia Artificial</span>, soy alguien que disfruta mucho hacer reír a las personas, me encanta aprender cosas nuevas, editar videos, programación, correr, gym, crear proyectos y siempre intento mejorar en todo lo que hago.
+        </p>
+
+        <span class="lead-question-text">Y si te gusta eso tal vez...</span>
+
+        <!-- Etapa 1: Pregunta y Botones -->
+        <div class="stage-card active" id="stageQuestion">
+          <div class="question-panel">
+            <h2 class="question-title">¿Te gustaría salir conmigo algún día?</h2>
+            
+            <div class="button-arena" id="buttonArena">
+              <div class="primary-choices">
+                <button class="btn-accept" id="btnAccept">Sí, acepto 🙂</button>
+                <button class="btn-know-more" id="btnKnowMore">Sí, pero me gustaría que nos conociéramos más</button>
+                <button class="btn-dodge" id="btnDodge">No</button>
+              </div>
+            </div>
+
+            <span class="decline-subtext" id="btnDecline">Prefiero decir que no, gracias</span>
+          </div>
+        </div>
+
+        <!-- Etapa 2: Agendar Fecha -->
+        <div class="stage-card" id="stageSchedule">
+          <div class="schedule-panel">
+            <p class="schedule-header-msg" id="scheduleLeadText">Perfecto — elige el día (y si quieres, la hora) que mejor te acomode:</p>
+            
+            <div class="input-row">
+              <input type="date" id="dateChoice" class="palette-input">
+              <input type="time" id="timeChoice" class="palette-input">
+            </div>
+
+            <button class="btn-confirm-send" id="btnSend" disabled>Enviar mi elección</button>
+          </div>
+        </div>
+
+        <!-- Etapa 3: Confirmación Salida o Conocerse Más -->
+        <div class="stage-card" id="stageConfirm">
+          <div class="status-panel">
+            <h2 class="status-title" id="confirmTitle">¡Quedamos así! 🎉</h2>
+            <div class="selection-badge" id="confirmedDate"></div>
+            <p class="status-text" id="confirmMsg">Le acabo de avisar. Nos vemos pronto.</p>
+            <p class="status-text note">(Si el mensaje no se abrió solo, puedes escribirme tú directamente.)</p>
+          </div>
+        </div>
+
+        <!-- Etapa 4: Salida cortés -->
+        <div class="stage-card" id="stageDecline">
+          <div class="status-panel">
+            <h2 class="status-title" style="color: var(--text-soft);">Entendido, gracias por tu tiempo</h2>
+            <p class="status-text note">De verdad, no hay ningún problema. Que tengas un excelente día.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const MI_WHATSAPP = "5215574320660";
+    let selectedMode = "salida"; // "salida" o "conocerse"
+
+    const lines = [
+      { html: '<span class="prompt">&gt;</span> cargando <span class="key">invitacion</span><span class="comment">.js</span> ...' },
+      { html: '<span class="prompt">&gt;</span> const <span class="key">remitente</span> = <span class="str">"Miguel"</span>;' },
+      { html: '<span class="prompt">&gt;</span> <span class="comment">// compilando presentación...</span>' },
+      { html: '<span class="prompt">&gt;</span> status: <span class="str">listo ✔</span>' }
+    ];
+
+    const terminalArt = document.getElementById('terminalArt');
+    let lineIdx = 0;
+
+    function renderTerminal() {
+      if (lineIdx < lines.length) {
+        const row = document.createElement('div');
+        row.innerHTML = lines[lineIdx].html;
+        terminalArt.appendChild(row);
+        lineIdx++;
+        setTimeout(renderTerminal, 400);
+      } else {
+        const cursor = document.createElement('span');
+        cursor.className = 'cursor';
+        terminalArt.appendChild(cursor);
+        
+        setTimeout(() => {
+          document.getElementById('artBody').classList.add('active');
+        }, 320);
+      }
+    }
+    renderTerminal();
+
+    // Botón evasivo
+    const btnDodge = document.getElementById('btnDodge');
+    const arena = document.getElementById('buttonArena');
+    let dodges = 0;
+
+    function dodge() {
+      dodges++;
+      const arenaRect = arena.getBoundingClientRect();
+      const btnRect = btnDodge.getBoundingClientRect();
+
+      const maxX = Math.max(arenaRect.width - btnRect.width - 6, 10);
+      const maxY = Math.max(arenaRect.height - btnRect.height - 6, 10);
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      btnDodge.style.position = 'absolute';
+      btnDodge.style.left = `${x}px`;
+      btnDodge.style.top = `${y}px`;
+
+      const phrases = ["No", "¿Segura?", "Inténtalo de nuevo", "Casi...", "Tan cerca", "Nop", "Otra vez no"];
+      btnDodge.textContent = phrases[Math.min(dodges, phrases.length - 1)];
+    }
+
+    btnDodge.addEventListener('mouseenter', dodge);
+    btnDodge.addEventListener('touchstart', (e) => { e.preventDefault(); dodge(); }, { passive: false });
+    btnDodge.addEventListener('click', (e) => { e.preventDefault(); dodge(); });
+
+    // Transiciones de etapas
+    const stageQuestion = document.getElementById('stageQuestion');
+    const stageSchedule = document.getElementById('stageSchedule');
+    const stageConfirm = document.getElementById('stageConfirm');
+    const stageDecline = document.getElementById('stageDecline');
+    const scheduleLeadText = document.getElementById('scheduleLeadText');
+
+    // Opción 1: Sí, acepto
+    document.getElementById('btnAccept').addEventListener('click', () => {
+      selectedMode = "salida";
+      scheduleLeadText.textContent = "Perfecto — elige el día (y si quieres, la hora) que mejor te acomode:";
+      stageQuestion.classList.remove('active');
+      stageSchedule.classList.add('active');
+    });
+
+    // Opción 2: Sí, pero conocernos más
+    document.getElementById('btnKnowMore').addEventListener('click', () => {
+      selectedMode = "conocerse";
+      const mensaje = encodeURIComponent("¡Hola! Me parece buena idea, me gustaría que nos conozcamos un poco más primero :)");
+      const url = `https://wa.me/${MI_WHATSAPP}?text=${mensaje}`;
+
+      document.getElementById('confirmTitle').textContent = "¡Me parece genial! ✨";
+      document.getElementById('confirmedDate').textContent = "Empecemos por platicar y conocernos más";
+      document.getElementById('confirmMsg').textContent = "Le acabo de enviar un mensaje para empezar a platicar.";
+
+      stageQuestion.classList.remove('active');
+      stageConfirm.classList.add('active');
+
+      window.open(url, '_blank');
+    });
+
+    // Opción rechazo cortés
+    document.getElementById('btnDecline').addEventListener('click', () => {
+      stageQuestion.classList.remove('active');
+      stageDecline.classList.add('active');
+    });
+
+    // Selector de fecha y hora
+    const dateInput = document.getElementById('dateChoice');
+    const timeInput = document.getElementById('timeChoice');
+    const sendBtn = document.getElementById('btnSend');
+
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('min', today);
+
+    dateInput.addEventListener('change', () => {
+      sendBtn.disabled = !dateInput.value;
+    });
+
+    sendBtn.addEventListener('click', () => {
+      if (!dateInput.value) return;
+
+      const fecha = new Date(dateInput.value + 'T00:00:00');
+      const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const fechaTexto = fecha.toLocaleDateString('es-MX', opciones);
+      const horaTexto = timeInput.value ? ` a las ${timeInput.value}` : '';
+
+      document.getElementById('confirmTitle').textContent = "¡Quedamos así! 🎉";
+      document.getElementById('confirmedDate').textContent = `${fechaTexto}${horaTexto}`;
+      document.getElementById('confirmMsg').textContent = "Le acabo de avisar. Nos vemos pronto.";
+
+      const mensaje = encodeURIComponent(`¡Hola! Acepté tu invitación, elegí el ${fechaTexto}${horaTexto}.`);
+      const url = `https://wa.me/${MI_WHATSAPP}?text=${mensaje}`;
+
+      stageSchedule.classList.remove('active');
+      stageConfirm.classList.add('active');
+
+      window.open(url, '_blank');
+    });
+  </script>
+</body>
+</html>
