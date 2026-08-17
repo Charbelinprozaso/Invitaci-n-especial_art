@@ -45,7 +45,6 @@
       overflow-x: hidden;
     }
 
-    /* Fondo artístico: Manchas orgánicas de óleo y acuarela digital */
     .art-backdrop {
       position: fixed;
       inset: 0;
@@ -102,7 +101,6 @@
       100% { transform: translate(45px, 55px) scale(1.1) rotate(14deg); }
     }
 
-    /* Textura de lienzo clásico con trama fina */
     .canvas-overlay {
       position: fixed;
       inset: 0;
@@ -115,7 +113,6 @@
       z-index: 0;
     }
 
-    /* Marco de galería */
     .frame-wrapper {
       position: relative;
       z-index: 1;
@@ -264,7 +261,7 @@
 
     .question-title {
       font-family: var(--serif);
-      font-size: 26px;
+      font-size: 27px;
       font-weight: 600;
       color: #ffffff;
       margin-bottom: 22px;
@@ -274,27 +271,17 @@
     .button-arena {
       position: relative;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      min-height: 120px;
-    }
-
-    .primary-choices {
-      position: relative;
-      display: flex;
       justify-content: center;
       align-items: center;
-      gap: 12px;
-      width: 100%;
-      flex-wrap: wrap;
+      gap: 18px;
+      min-height: 64px;
     }
 
     button {
       font-family: var(--sans);
-      font-size: 14.5px;
+      font-size: 15px;
       font-weight: 600;
-      padding: 13px 22px;
+      padding: 13px 28px;
       border-radius: 12px;
       border: none;
       cursor: pointer;
@@ -313,22 +300,10 @@
       color: #000000;
     }
 
-    .btn-know-more {
-      background: rgba(226, 125, 150, 0.12);
-      color: #f7cbd6;
-      border: 1px solid rgba(226, 125, 150, 0.35);
-    }
-
-    .btn-know-more:hover {
-      background: rgba(226, 125, 150, 0.22);
-      transform: translateY(-2px);
-      border-color: rgba(226, 125, 150, 0.6);
-    }
-
     .btn-dodge {
       background: rgba(255, 255, 255, 0.04);
       color: var(--text-soft);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
       transition: left 0.15s ease, top 0.15s ease, transform 0.1s ease;
     }
 
@@ -339,7 +314,7 @@
 
     .decline-subtext {
       display: block;
-      margin-top: 14px;
+      margin-top: 18px;
       font-size: 12.5px;
       color: var(--text-dim);
       text-decoration: none;
@@ -352,66 +327,6 @@
       text-decoration: underline;
     }
 
-    .schedule-panel {
-      background: rgba(14, 15, 26, 0.65);
-      border: 1px solid rgba(223, 186, 115, 0.16);
-      border-radius: 20px;
-      padding: 24px;
-      text-align: center;
-    }
-
-    .schedule-header-msg {
-      font-size: 15px;
-      color: #d6d3e2;
-      margin-bottom: 20px;
-    }
-
-    .input-row {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    .palette-input {
-      font-family: var(--mono);
-      font-size: 13.5px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(223, 186, 115, 0.22);
-      border-radius: 10px;
-      color: #ffffff;
-      padding: 12px 14px;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      color-scheme: dark;
-    }
-
-    .palette-input:focus {
-      border-color: var(--gold-primary);
-      box-shadow: 0 0 0 3px rgba(223, 186, 115, 0.22);
-    }
-
-    .btn-confirm-send {
-      background: linear-gradient(135deg, #76a88b 0%, #4e8566 100%);
-      color: #ffffff;
-      box-shadow: 0 8px 20px -6px rgba(118, 168, 139, 0.5);
-      width: 100%;
-      max-width: 260px;
-      margin: 0 auto;
-    }
-
-    .btn-confirm-send:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 24px -6px rgba(118, 168, 139, 0.65);
-    }
-
-    .btn-confirm-send:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-      box-shadow: none;
-    }
-
     .status-panel {
       text-align: center;
       padding: 24px 16px;
@@ -419,7 +334,7 @@
 
     .status-title {
       font-family: var(--serif);
-      font-size: 31px;
+      font-size: 32px;
       font-weight: 600;
       color: var(--gold-light);
       margin-bottom: 12px;
@@ -428,11 +343,11 @@
     .selection-badge {
       display: inline-block;
       font-family: var(--mono);
-      font-size: 13.5px;
+      font-size: 14px;
       background: rgba(223, 186, 115, 0.12);
       border: 1px solid rgba(223, 186, 115, 0.3);
       color: var(--gold-primary);
-      padding: 8px 18px;
+      padding: 8px 20px;
       border-radius: 8px;
       margin-bottom: 18px;
     }
@@ -452,17 +367,12 @@
     @media (max-width: 480px) {
       .frame-inner { padding: 28px 20px; }
       .main-heading { font-size: 28px; }
-      .question-title { font-size: 22px; }
-      .primary-choices { flex-direction: column; width: 100%; }
-      .primary-choices button { width: 100%; }
-      .input-row { flex-direction: column; }
-      .palette-input { width: 100%; }
+      .question-title { font-size: 23px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Fondo dinámico con mezclas de pigmentos al óleo -->
   <div class="art-backdrop">
     <div class="pigment pigment-1"></div>
     <div class="pigment pigment-2"></div>
@@ -490,48 +400,28 @@
 
         <span class="lead-question-text">Y si te gusta eso tal vez...</span>
 
-        <!-- Etapa 1: Pregunta y Botones -->
         <div class="stage-card active" id="stageQuestion">
           <div class="question-panel">
-            <h2 class="question-title">¿Te gustaría salir conmigo algún día?</h2>
+            <h2 class="question-title">¿Nos podríamos conocer más?</h2>
             
             <div class="button-arena" id="buttonArena">
-              <div class="primary-choices">
-                <button class="btn-accept" id="btnAccept">Sí, acepto 🙂</button>
-                <button class="btn-know-more" id="btnKnowMore">Sí, pero me gustaría que nos conociéramos más</button>
-                <button class="btn-dodge" id="btnDodge">No</button>
-              </div>
+              <button class="btn-accept" id="btnAccept">Sí 🙂</button>
+              <button class="btn-dodge" id="btnDodge">No</button>
             </div>
 
             <span class="decline-subtext" id="btnDecline">Prefiero decir que no, gracias</span>
           </div>
         </div>
 
-        <!-- Etapa 2: Agendar Fecha -->
-        <div class="stage-card" id="stageSchedule">
-          <div class="schedule-panel">
-            <p class="schedule-header-msg" id="scheduleLeadText">Perfecto — elige el día (y si quieres, la hora) que mejor te acomode:</p>
-            
-            <div class="input-row">
-              <input type="date" id="dateChoice" class="palette-input">
-              <input type="time" id="timeChoice" class="palette-input">
-            </div>
-
-            <button class="btn-confirm-send" id="btnSend" disabled>Enviar mi elección</button>
-          </div>
-        </div>
-
-        <!-- Etapa 3: Confirmación Salida o Conocerse Más -->
         <div class="stage-card" id="stageConfirm">
           <div class="status-panel">
-            <h2 class="status-title" id="confirmTitle">¡Quedamos así! 🎉</h2>
-            <div class="selection-badge" id="confirmedDate"></div>
-            <p class="status-text" id="confirmMsg">Le acabo de avisar. Nos vemos pronto.</p>
+            <h2 class="status-title">¡Me parece genial! ✨</h2>
+            <div class="selection-badge">Empecemos por platicar más</div>
+            <p class="status-text">Le acabo de avisar. Nos escribimos pronto.</p>
             <p class="status-text note">(Si el mensaje no se abrió solo, puedes escribirme tú directamente.)</p>
           </div>
         </div>
 
-        <!-- Etapa 4: Salida cortés -->
         <div class="stage-card" id="stageDecline">
           <div class="status-panel">
             <h2 class="status-title" style="color: var(--text-soft);">Entendido, gracias por tu tiempo</h2>
@@ -546,7 +436,6 @@
 
   <script>
     const MI_WHATSAPP = "5215574320660";
-    let selectedMode = "salida"; // "salida" o "conocerse"
 
     const lines = [
       { html: '<span class="prompt">&gt;</span> cargando <span class="key">invitacion</span><span class="comment">.js</span> ...' },
@@ -577,7 +466,6 @@
     }
     renderTerminal();
 
-    // Botón evasivo
     const btnDodge = document.getElementById('btnDodge');
     const arena = document.getElementById('buttonArena');
     let dodges = 0;
@@ -605,30 +493,13 @@
     btnDodge.addEventListener('touchstart', (e) => { e.preventDefault(); dodge(); }, { passive: false });
     btnDodge.addEventListener('click', (e) => { e.preventDefault(); dodge(); });
 
-    // Transiciones de etapas
     const stageQuestion = document.getElementById('stageQuestion');
-    const stageSchedule = document.getElementById('stageSchedule');
     const stageConfirm = document.getElementById('stageConfirm');
     const stageDecline = document.getElementById('stageDecline');
-    const scheduleLeadText = document.getElementById('scheduleLeadText');
 
-    // Opción 1: Sí, acepto
     document.getElementById('btnAccept').addEventListener('click', () => {
-      selectedMode = "salida";
-      scheduleLeadText.textContent = "Perfecto — elige el día (y si quieres, la hora) que mejor te acomode:";
-      stageQuestion.classList.remove('active');
-      stageSchedule.classList.add('active');
-    });
-
-    // Opción 2: Sí, pero conocernos más
-    document.getElementById('btnKnowMore').addEventListener('click', () => {
-      selectedMode = "conocerse";
-      const mensaje = encodeURIComponent("¡Hola! Me parece buena idea, me gustaría que nos conozcamos un poco más primero :)");
+      const mensaje = encodeURIComponent("¡Hola! Me parece buena idea que nos conozcamos más 🙂✨");
       const url = `https://wa.me/${MI_WHATSAPP}?text=${mensaje}`;
-
-      document.getElementById('confirmTitle').textContent = "¡Me parece genial! ✨";
-      document.getElementById('confirmedDate').textContent = "Empecemos por platicar y conocernos más";
-      document.getElementById('confirmMsg').textContent = "Le acabo de enviar un mensaje para empezar a platicar.";
 
       stageQuestion.classList.remove('active');
       stageConfirm.classList.add('active');
@@ -636,43 +507,9 @@
       window.open(url, '_blank');
     });
 
-    // Opción rechazo cortés
     document.getElementById('btnDecline').addEventListener('click', () => {
       stageQuestion.classList.remove('active');
       stageDecline.classList.add('active');
-    });
-
-    // Selector de fecha y hora
-    const dateInput = document.getElementById('dateChoice');
-    const timeInput = document.getElementById('timeChoice');
-    const sendBtn = document.getElementById('btnSend');
-
-    const today = new Date().toISOString().split('T')[0];
-    dateInput.setAttribute('min', today);
-
-    dateInput.addEventListener('change', () => {
-      sendBtn.disabled = !dateInput.value;
-    });
-
-    sendBtn.addEventListener('click', () => {
-      if (!dateInput.value) return;
-
-      const fecha = new Date(dateInput.value + 'T00:00:00');
-      const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      const fechaTexto = fecha.toLocaleDateString('es-MX', opciones);
-      const horaTexto = timeInput.value ? ` a las ${timeInput.value}` : '';
-
-      document.getElementById('confirmTitle').textContent = "¡Quedamos así! 🎉";
-      document.getElementById('confirmedDate').textContent = `${fechaTexto}${horaTexto}`;
-      document.getElementById('confirmMsg').textContent = "Le acabo de avisar. Nos vemos pronto.";
-
-      const mensaje = encodeURIComponent(`¡Hola! Acepté tu invitación, elegí el ${fechaTexto}${horaTexto}.`);
-      const url = `https://wa.me/${MI_WHATSAPP}?text=${mensaje}`;
-
-      stageSchedule.classList.remove('active');
-      stageConfirm.classList.add('active');
-
-      window.open(url, '_blank');
     });
   </script>
 </body>
